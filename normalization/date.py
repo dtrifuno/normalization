@@ -1,6 +1,5 @@
-from num2words import num2words
-
 from normalization.base import Pipeline, RESub
+from num2words import num2words
 
 MONTHS = "јануари|февруари|март|април|мај|јуни|јули|август|септември|октомври|ноември|декември"
 
@@ -21,7 +20,9 @@ def day_month_repl(match):
 day_month2words = RESub(day_month_pattern, day_month_repl)
 
 
-month_year_pattern = f"(?i)((?:{MONTHS})\\s*)?" + r"(\d+)(\s*(?:година|год[.]?|г[.]?))?"
+month_year_pattern = (
+    f"(?i)((?:{MONTHS})\\s*)?" + r"(\d+)(\s*(?:година|год[.]?|г[.]?))?(?!\w)"
+)
 
 
 def month_year_repl(match):
